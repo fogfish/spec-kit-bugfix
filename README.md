@@ -14,13 +14,14 @@ When bugs surface during implementation, the SDD workflow breaks down:
 
 ## Solution
 
-The Bugfix Workflow extension adds three commands that close the gap between bug discovery and spec correction:
+The Bugfix Workflow extension adds four commands that close the gap between bug discovery and spec correction:
 
-| Command | Purpose | Modifies Files? |
-|---------|---------|-----------------|
-| `/speckit.bugfix.report` | Capture a bug and trace it back to the relevant spec, plan, and task artifacts | Yes — creates bug report file |
-| `/speckit.bugfix.patch` | Surgically update spec, plan, and tasks to address the reported bug | Yes — spec.md, plan.md, tasks.md |
-| `/speckit.bugfix.verify` | Verify that bugfix patches are consistent across all spec artifacts | No — read-only |
+| Command                  | Purpose                                                                        | Modifies Files?                  |
+| ------------------------ | ------------------------------------------------------------------------------ | -------------------------------- |
+| `/speckit.bugfix.report` | Capture a bug and trace it back to the relevant spec, plan, and task artifacts | Yes — creates bug report file    |
+| `/speckit.bugfix.patch`  | Surgically update spec, plan, and tasks to address the reported bug            | Yes — spec.md, plan.md, tasks.md |
+| `/speckit.bugfix.switch` | Switch the bugfix context                                                      | Yes                              |
+| `/speckit.bugfix.verify` | Verify that bugfix patches are consistent across all spec artifacts            | No — read-only                   |
 
 ## Installation
 
@@ -32,13 +33,13 @@ specify extension add --from https://github.com/Quratulain-bilal/spec-kit-bugfix
 
 The extension classifies bugs into five categories:
 
-| Type | Description | Example |
-|------|-------------|---------|
-| Spec gap | Requirement missing from spec | Auth flow doesn't handle expired tokens |
-| Spec conflict | Two requirements contradict | "Must be stateless" vs "Must track sessions" |
-| Implementation drift | Code diverges from spec | Spec says REST, code uses GraphQL |
-| Untested flow | Edge case not covered | Concurrent user updates not handled |
-| Dependency issue | External dependency changed | API response format differs from assumption |
+| Type                 | Description                   | Example                                      |
+| -------------------- | ----------------------------- | -------------------------------------------- |
+| Spec gap             | Requirement missing from spec | Auth flow doesn't handle expired tokens      |
+| Spec conflict        | Two requirements contradict   | "Must be stateless" vs "Must track sessions" |
+| Implementation drift | Code diverges from spec       | Spec says REST, code uses GraphQL            |
+| Untested flow        | Edge case not covered         | Concurrent user updates not handled          |
+| Dependency issue     | External dependency changed   | API response format differs from assumption  |
 
 ## Workflow
 
@@ -57,6 +58,8 @@ Bug discovered during /speckit.implement
        ▼
 /speckit.implement         ← Resume implementation with corrected specs
 ```
+
+Use `/speckit.bugfix.switch <spec-id>` if the bug is discovered after the feature branch has been destroyed.
 
 ## Commands
 
@@ -79,6 +82,16 @@ Surgically updates spec artifacts based on a bug report:
 - Adds new tasks with sequential IDs and proper dependencies
 - Updates Wave DAG if present
 - Tracks all changes with bugfix notes and dates
+
+### `/speckit.bugfix.switch`
+
+Switches the active bugfix context when working with multiple bugs:
+
+- Lists all available bug reports for the current feature
+- Allows selection of a different bug to make active
+- Updates the bugfix context to the selected bug
+- Enables working on multiple bugs sequentially without losing progress
+- Restores previous context when switching back
 
 ### `/speckit.bugfix.verify`
 

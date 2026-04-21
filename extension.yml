@@ -3,7 +3,7 @@ schema_version: "1.0"
 extension:
   id: bugfix
   name: "Bugfix Workflow"
-  version: "1.0.0"
+  version: "1.1.0"
   description: "Structured bugfix workflow — capture bugs, trace to spec artifacts, and patch specs surgically"
   author: "Quratulain-bilal"
   repository: "https://github.com/Quratulain-bilal/spec-kit-bugfix"
@@ -20,6 +20,9 @@ provides:
     - name: speckit.bugfix.patch
       file: commands/speckit.bugfix.patch.md
       description: "Surgically update spec, plan, and tasks to address the reported bug"
+    - name: speckit.bugfix.switch
+      file: commands/speckit.bugfix.switch.md
+      description: "Switch to a different bugfix context"
     - name: speckit.bugfix.verify
       file: commands/speckit.bugfix.verify.md
       description: "Verify that bugfix patches are consistent across all spec artifacts"

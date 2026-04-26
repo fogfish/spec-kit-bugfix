@@ -1,5 +1,5 @@
 ---
-description: "Switch to the spec for bug fixing"
+description: "Switch to a different bugfix context"
 ---
 
 # Switch bugfix context
@@ -18,7 +18,8 @@ $ARGUMENTS
    - Check `specs/{feature}` dir exists, report an error to user if missing.
 
 2. **Checkout feature branch**:
-   - Checkout a new `{feature}` branch using git command, always use main branch as source. 
+   - Checkout a new `{feature}` branch using git command, always use main branch as source.
+   - If current branch contains uncommitted changes STOP immediately and escalate to project maintainers for guidance.
 
 3. **Feature context update**:
    - Update `.specify/feature.json` with `specs/{feature}`  

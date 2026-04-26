@@ -20,7 +20,7 @@ The Bugfix Workflow extension adds four commands that close the gap between bug 
 | ------------------------ | ------------------------------------------------------------------------------ | -------------------------------- |
 | `/speckit.bugfix.report` | Capture a bug and trace it back to the relevant spec, plan, and task artifacts | Yes — creates bug report file    |
 | `/speckit.bugfix.patch`  | Surgically update spec, plan, and tasks to address the reported bug            | Yes — spec.md, plan.md, tasks.md |
-| `/speckit.bugfix.switch` | Switch the bugfix context                                                      | Yes                              |
+| `/speckit.bugfix.switch` | Switch to a different bugfix context                                           | Yes                              |
 | `/speckit.bugfix.verify` | Verify that bugfix patches are consistent across all spec artifacts            | No — read-only                   |
 
 ## Installation
